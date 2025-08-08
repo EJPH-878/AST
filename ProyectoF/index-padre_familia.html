@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AsisTech - Panel Padres de Familia</title>
+    <title>AsisTech - Padres de Familia</title>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Font Awesome para iconos -->
@@ -21,7 +21,7 @@
             </div>
             <div style="color: var(--gray-800); font-weight: 600;">
                 <i class="fas fa-users"></i>
-                Panel Padres de Familia
+                Padres de Familia
             </div>
         </header>
 
@@ -33,17 +33,21 @@
                         Seguimiento de Asistencia de mi Hijo/a
                     </h2>
                     
-                    <div class="form-group">
-                        <label for="hijo-select">
-                            <i class="fas fa-child"></i>
-                            Seleccionar hijo/a
-                        </label>
-                        <select id="hijo-select">
-                            <option value="">Seleccione un estudiante</option>
-                            <option value="maria-gonzalez">María González Hernández - 2023040156</option>
-                            <option value="carlos-gonzalez">Carlos González Hernández - 2023040157</option>
-                        </select>
-                    </div>
+                   <div class="form-group">
+    <label for="matricula-input">
+        <i class="fas fa-id-card"></i>
+        Matrícula del estudiante
+    </label>
+    <input 
+        type="text" 
+        id="matricula-input" 
+        name="matricula" 
+        placeholder="Ingrese la matrícula del estudiante" 
+        maxlength="20"
+        pattern="[0-9]+"
+        title="Ingrese solo números"
+    >
+</div>
 
                     <div class="form-group">
                         <label for="periodo-select">
