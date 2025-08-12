@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AsisTech - Panel Directivo</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome para iconos -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Estilos unificados -->
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <div class="docente-container">
+        <header class="top-bar">
+            <div class="logo">
+                <i class="fas fa-bars menu-icon"></i>
+                <i class="fas fa-graduation-cap"></i>
+                AsisTech
+            </div>
+            <div style="color: var(--gray-800); font-weight: 600;">
+                <i class="fas fa-user-shield"></i>
+                Panel Directivo
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="card">
+                <section class="form-section">
+                    <h2>
+                        <i class="fas fa-chart-bar"></i>
+                        Dashboard Institucional de Asistencias
+                    </h2>
+                    
+                    <!-- Tarjetas de resumen general -->
+                    <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
+                        <div class="stat-card" style="background: var(--secondary-gradient); padding: 2rem; border-radius: var(--border-radius-lg); color: var(--gray-800); text-align: center;">
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div style="font-size: 2.5rem; font-weight: bold;" id="total-estudiantes">245</div>
+                            <div style="font-weight: 600; font-size: 1.125rem;">Total Estudiantes</div>
+                        </div>
+                        
+                        <div class="stat-card" style="background: var(--secondary-gradient); padding: 2rem; border-radius: var(--border-radius-lg); color: var(--gray-800); text-align: center;">
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                            </div>
+                            <div style="font-size: 2.5rem; font-weight: bold;" id="total-docentes">28</div>
+                            <div style="font-weight: 600; font-size: 1.125rem;">Total Docentes</div>
+                        </div>
+                        
+                        <div class="stat-card" style="background: var(--secondary-gradient); padding: 2rem; border-radius: var(--border-radius-lg); color: var(--gray-800); text-align: center;">
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div style="font-size: 2.5rem; font-weight: bold;" id="total-carreras">4</div>
+                            <div style="font-weight: 600; font-size: 1.125rem;">Carreras Activas</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reporte-tipo">
+                            <i class="fas fa-filter"></i>
+                            Tipo de Reporte
+                        </label>
+                        <select id="reporte-tipo">
+                            <option value="general">Reporte General Institucional</option>
+                            <option value="carrera">Por Carrera</option>
+                            <option value="docente">Por Docente</option>
+                            <option value="periodo">Por Periodo</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="filtro-carrera" style="display: none;">
+                        <label for="carrera-filtro">
+                            <i class="fas fa-graduation-cap"></i>
+                            Seleccionar Carrera
+                        </label>
+                        <select id="carrera-filtro">
+                            <option value="">Todas las carreras</option>
+                            <option value="tidsm">Tecnologías de la Información DSM</option>
+                            <option value="sistemas">Ingeniería en Sistemas</option>
+                            <option value="web">Desarrollo Web</option>
+                            <option value="otra">Otra Carrera</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="filtro-docente" style="display: none;">
+                        <label for="docente-filtro">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            Seleccionar Docente
+                        </label>
+                        <select id="docente-filtro">
+                            <option value="">Todos los docentes</option>
+                            <option value="martinez">Prof. Juan Martínez</option>
+                            <option value="lopez">Prof. Ana López</option>
+                            <option value="garcia">Prof. Carlos García</option>
+                            <option value="rodriguez">Prof. María Rodríguez</option>
+                        </select>
+                    </div>
+
+                    <div class="datetime-group" id="filtro-periodo" style="display: none;">
+                        <div class="form-group">
+                            <label for="fecha-inicio">
+                                <i class="fas fa-calendar-alt"></i>
+                                Fecha Inicio
+                            </label>
+                            <input type="date" class="form-input" id="fecha-inicio">
+                        </div>
+                        <div class="form-group">
+                            <label for="fecha-fin">
+                                <i class="fas fa-calendar-check"></i>
+                                Fecha Fin
+                            </label>
+                            <input type="date" class="form-input" id="fecha-fin">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Sección de métricas de asistencia -->
+                <section id="metricas-section" class="table-container">
+                    <div class="table-header">
+                        <h3>
+                            <i class="fas fa-analytics"></i>
+                            Métricas de Asistencia Institucional
+                        </h3>
+                    </div>
+                    
+                    <div style="padding: 2rem;">
+                        <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+                            <div class="stat-card" style="background: var(--gray-50); padding: 1.5rem; border-radius: var(--border-radius); text-align: center; border: 2px solid var(--accent-color);">
+                                <div style="font-size: 2rem; color: var(--accent-color); margin-bottom: 0.5rem;">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div style="font-size: 2rem; font-weight: bold; color: var(--gray-800);" id="total-asistencias">1,847</div>
+                                <div style="color: var(--gray-700); font-weight: 600;">Total Asistencias</div>
+                            </div>
+                            
+                            <div class="stat-card" style="background: var(--gray-50); padding: 1.5rem; border-radius: var(--border-radius); text-align: center; border: 2px solid #ef4444;">
+                                <div style="font-size: 2rem; color: #ef4444; margin-bottom: 0.5rem;">
+                                    <i class="fas fa-times-circle"></i>
+                                </div>
+                                <div style="font-size: 2rem; font-weight: bold; color: var(--gray-800);" id="total-ausencias">203</div>
+                                <div style="color: var(--gray-700); font-weight: 600;">Total Ausencias</div>
+                            </div>
+                            
+                            <div class="stat-card" style="background: var(--gray-50); padding: 1.5rem; border-radius: var(--border-radius); text-align: center; border: 2px solid #f59e0b;">
+                                <div style="font-size: 2rem; color: #f59e0b; margin-bottom: 0.5rem;">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div style="font-size: 2rem; font-weight: bold; color: var(--gray-800);" id="total-retardos">127</div>
+                                <div style="color: var(--gray-700); font-weight: 600;">Total Retardos</div>
+                            </div>
+                            
+                            <div class="stat-card" style="background: var(--gray-50); padding: 1.5rem; border-radius: var(--border-radius); text-align: center; border: 2px solid var(--primary-color);">
+                                <div style="font-size: 2rem; color: var(--primary-color); margin-bottom: 0.5rem;">
+                                    <i class="fas fa-percentage"></i>
+                                </div>
+                                <div style="font-size: 2rem; font-weight: bold; color: var(--gray-800);" id="promedio-asistencia">84.8%</div>
+                                <div style="color: var(--gray-700); font-weight: 600;">Promedio General</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Tabla de reportes por carrera -->
+                <section id="tabla-reportes" class="table-container">
+                    <div class="table-header">
+                        <h3>
+                            <i class="fas fa-table"></i>
+                            Reporte por Carreras
+                        </h3>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="styled-table">
+                            <thead>
+                                <tr>
+                                    <th><i class="fas fa-graduation-cap"></i> Carrera</th>
+                                    <th><i class="fas fa-users"></i> Estudiantes</th>
+                                    <th><i class="fas fa-check"></i> Asistencias</th>
+                                    <th><i class="fas fa-times"></i> Ausencias</th>
+                                    <th><i class="fas fa-clock"></i> Retardos</th>
+                                    <th><i class="fas fa-percentage"></i> % Asistencia</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Tecnologías de la Información DSM</td>
+                                    <td>82</td>
+                                    <td>654</td>
+                                    <td>67</td>
+                                    <td>45</td>
+                                    <td style="color: var(--accent-color); font-weight: bold;">85.2%</td>
+                                </tr>
+                                <tr>
+                                    <td>Ingeniería en Sistemas</td>
+                                    <td>67</td>
+                                    <td>589</td>
+                                    <td>43</td>
+                                    <td>32</td>
+                                    <td style="color: var(--accent-color); font-weight: bold;">88.4%</td>
+                                </tr>
+                                <tr>
+                                    <td>Desarrollo Web</td>
+                                    <td>54</td>
+                                    <td>445</td>
+                                    <td>58</td>
+                                    <td>28</td>
+                                    <td style="color: var(--accent-color); font-weight: bold;">83.1%</td>
+                                </tr>
+                                <tr>
+                                    <td>Otra Carrera</td>
+                                    <td>42</td>
+                                    <td>359</td>
+                                    <td>35</td>
+                                    <td>22</td>
+                                    <td style="color: var(--accent-color); font-weight: bold;">86.3%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <div class="btn-action-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                    <button id="btn-generar-reporte" class="btn btn-secondary">
+                        <i class="fas fa-chart-line"></i>
+                        Generar Reporte
+                    </button>
+                    <button id="btn-exportar-excel" class="btn btn-secondary" style="background: var(--accent-gradient);">
+                        <i class="fas fa-file-excel"></i>
+                        Exportar a Excel
+                    </button>
+                    <button id="btn-exportar-pdf" class="btn btn-secondary" style="background: var(--purple-gradient);">
+                        <i class="fas fa-file-pdf"></i>
+                        Exportar a PDF
+                    </button>
+                    <button id="btn-configuracion" class="btn btn-secondary" style="background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);">
+                        <i class="fas fa-cog"></i>
+                        Configuración
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Loading overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <p id="loadingMessage">Generando reporte...</p>
+        </div>  
+    </div>
+
+    <!-- Modal personalizado -->
+    <div id="customModal" class="custom-modal">
+        <div class="custom-modal-content">
+            <p id="modalMessage"></p>
+            <button onclick="closeModal()">
+                <i class="fas fa-times"></i>
+                Cerrar
+            </button>
+        </div>
+    </div>
+
+    <!-- Botón home -->
+    <a href="index.html" class="home-button" title="Ir al inicio">
+        <i class="fas fa-home"></i>
+    </a>
+
+    <!-- Scripts unificados -->
+    <script src="scritps-unificados.js"></script>
+</body>
+</html>
